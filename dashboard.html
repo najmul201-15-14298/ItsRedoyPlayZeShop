@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | ItsRedoyPlayZeShop</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import {
+      getAuth,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqHbnqSIYV1AmyDTiwQjNUvE4LwgqyxYY",
+      authDomain: "itsredoyplayzeshop.firebaseapp.com",
+      projectId: "itsredoyplayzeshop",
+      storageBucket: "itsredoyplayzeshop.appspot.com",
+      messagingSenderId: "903605298299",
+      appId: "1:903605298299:web:63a809fbbfa6f3c21aeede",
+      measurementId: "G-B5FQZSVV78"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    window.onload = () => {
+      const userEmailEl = document.getElementById("user-email");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      onAuthStateChanged(auth, user => {
+        if (user) {
+          userEmailEl.innerText = user.email;
+        } else {
+          window.location.href = "login.html";
+        }
+      });
+
+      logoutBtn.addEventListener("click", () => {
+        signOut(auth).then(() => {
+          alert("Logged out successfully.");
+          window.location.href = "login.html";
+        });
+      });
+    };
+  </script>
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="theme-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="container">
+    <div class="box" style="text-align: center;">
+      <h2>Welcome to Your Dashboard</h2>
+      <p>Logged in as: <strong id="user-email"></strong></p>
+
+      <div style="margin: 20px 0;">
+        <a href="topup.html" class="btn btn-primary">Start Top-Up</a>
+        <a href="games.html" class="btn btn-secondary" style="margin-left: 10px;">View Games</a>
+      </div>
+
+      <button id="logout-btn" class="btn btn-dark">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("theme-switch");
+    themeToggle.addEventListener("change", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+</body>
+</html>

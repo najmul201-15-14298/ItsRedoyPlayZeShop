@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | ItsRedoyPlayZeShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="theme-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="container">
+    <div class="box" style="text-align: center;">
+      <h2>Contact Us</h2>
+      <p>If you need support or have any questions, feel free to message us on WhatsApp.</p>
+
+      <a class="btn btn-primary" href="https://wa.me/8801879144197" target="_blank">
+        Message on WhatsApp
+      </a>
+
+      <div style="margin-top: 30px;">
+        <a href="index.html" class="btn btn-light">Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("theme-switch");
+    themeToggle.addEventListener("change", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+</body>
+</html>

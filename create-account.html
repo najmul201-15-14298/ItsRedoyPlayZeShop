@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account | ItsRedoyPlayZeShop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #db4437;
+      --secondary-color: #3b82f6;
+      --dark-color: #1f2937;
+      --light-color: #ffffff;
+      --text-color: #222;
+      --box-bg: rgba(255, 255, 255, 0.9);
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ece9e6, #ffffff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: transparent;
+    }
+
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      background-color: #ccc;
+      border-radius: 34px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: 0.4s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 4px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #1f2937;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    .signup-box {
+      background-color: var(--box-bg);
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: 0 8px 20px var(--shadow-color);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+      backdrop-filter: blur(8px);
+    }
+
+    h2 {
+      margin-bottom: 24px;
+      color: var(--text-color);
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .btn-dark {
+      background-color: var(--dark-color);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 12px;
+    }
+
+    .btn-dark:hover {
+      background-color: #111827;
+    }
+
+    .btn-light {
+      background-color: white;
+      color: #1f2937;
+      border: 1px solid #ccc;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn-light:hover {
+      background-color: #f3f4f6;
+    }
+
+    #user-created {
+      margin-top: 20px;
+      font-weight: 500;
+      color: var(--secondary-color);
+      font-size: 15px;
+    }
+
+    .dark-mode {
+      background: #111827 !important;
+      color: #f9fafb !important;
+    }
+
+    .dark-mode .signup-box {
+      background-color: rgba(31, 41, 55, 0.9) !important;
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .dark-mode h2,
+    .dark-mode p,
+    .dark-mode button,
+    .dark-mode a {
+      color: #f9fafb !important;
+    }
+
+    .dark-mode .btn-light {
+      background-color: #f9fafb;
+      color: #111827;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="theme-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="signup-box">
+    <h2>Create an Account</h2>
+    <button class="btn-dark" id="google-signup">Continue with Google</button>
+    <a href="login.html" class="btn-light">Already have an account? Login</a>
+    <div id="user-created"></div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+    import {
+      getAuth,
+      signInWithPopup,
+      GoogleAuthProvider,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqHbnqSIYV1AmyDTiwQjNUvE4LwgqyxYY",
+      authDomain: "itsredoyplayzeshop.firebaseapp.com",
+      projectId: "itsredoyplayzeshop",
+      storageBucket: "itsredoyplayzeshop.appspot.com",
+      messagingSenderId: "903605298299",
+      appId: "1:903605298299:web:63a809fbbfa6f3c21aeede",
+      measurementId: "G-B5FQZSVV78"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
+
+    const signupBtn = document.getElementById("google-signup");
+    const userCreated = document.getElementById("user-created");
+
+    signupBtn.addEventListener("click", () => {
+      signInWithPopup(auth, provider)
+        .then(result => {
+          userCreated.innerText = `Account created: ${result.user.email}`;
+        })
+        .catch(error => alert("Signup failed: " + error.message));
+    });
+
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        userCreated.innerText = `You're signed in as: ${user.email}`;
+      }
+    });
+  </script>
+
+  <script>
+    const themeToggle = document.getElementById("theme-switch");
+    themeToggle.addEventListener("change", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+
+</body>
+</html>

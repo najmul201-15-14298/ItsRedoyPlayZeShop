@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Top-Up | ItsRedoyPlayZeShop</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="theme-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="container">
+    <div class="box" style="text-align: center;">
+      <h2>Select a Game to Top-Up</h2>
+
+      <div class="games-grid">
+        <a href="freefire.html">
+          <img src="freefire.png" alt="Free Fire" />
+          <p>Free Fire</p>
+        </a>
+        <a href="pubg.html">
+          <img src="pubg.png" alt="PUBG Mobile" />
+          <p>PUBG Mobile</p>
+        </a>
+      </div>
+
+      <div style="margin-top: 30px;">
+        <a href="dashboard.html" class="btn btn-light">Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById("theme-switch");
+    themeToggle.addEventListener("change", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+</body>
+</html>

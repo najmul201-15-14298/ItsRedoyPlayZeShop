@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ItsRedoyPlayZeShop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <label class="switch">
+      <input type="checkbox" id="theme-switch">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="container">
+    <div class="box" style="text-align: center;">
+      <img src="assets/logo.png" alt="ItsRedoyPlayZeShop Logo" style="max-width: 200px; margin-bottom: 20px;">
+      <h1>Welcome to ItsRedoyPlayZeShop</h1>
+      <p>Your trusted platform for Free Fire & PUBG Mobile top-ups.</p>
+
+      <div style="margin-top: 30px;">
+        <a href="topup.html" class="btn btn-primary">Top-Up Now</a>
+        <a href="login.html" class="btn btn-secondary" style="margin-left: 10px;">Login</a>
+        <a href="create-account.html" class="btn btn-light" style="margin-left: 10px;">Create an Account</a>
+        <a href="contact.html" class="btn btn-dark" style="margin-left: 10px;">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dark/light theme toggle logic
+    const themeToggle = document.getElementById("theme-switch");
+    themeToggle.addEventListener("change", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+</body>
+</html>
